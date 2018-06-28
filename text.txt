@@ -1,0 +1,17 @@
+python manage.py runserver 0.0.0.0:8000
+
+
+* 새로운 모듈 추가하기
+
+python manage.py startapp guestbook
+
+settings - INSTALLED_APPS 'guestbook' 등록
+
+urls - urlpatterns - path('guestbook/', views.index) 등록
+
+views 함수 만들어주기
+
+models.py
+
+admin.py
+
