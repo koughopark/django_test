@@ -6,7 +6,10 @@ from guestbook.models import Guestbook
 # Create your views here.
 
 def index(request):
-    return render(request, 'guestbook/index.html')
+    guestbook_list = Guestbook.objects.all().order_by('-regdate')
+
+    context = {'guestbook_list': guestbook_list}
+    return render(request, 'guestbook/index.html', context)
 
 
 def add(request):
@@ -17,4 +20,15 @@ def add(request):
 
     guestbook.save()
 
+    return HttpResponseRedirect('/guestbook')
+
+
+def deleteform(request):
+    print('request : ', request)
+    return render(request, 'guestbook/deleteform.html')
+
+
+def delete(request):
+    Guestbook.objects.filter(id=request.POST['id']).filter(password=request.POST['password']).delete()
+    Guestbook.save()
     return HttpResponseRedirect('/guestbook')
